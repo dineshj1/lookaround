@@ -2,6 +2,7 @@
 --[[ SUN360 ]]--
 ------------------------------------------------------------------------
 require 'dp'
+require 'config'
 
 local SUN360, DataSource = torch.class("dp.SUN360", "dp.DataSource")
 SUN360.isSUN360 = true
@@ -53,17 +54,13 @@ function SUN360:__init(config)
       {arg='mini', type=boolean, default=false, help='whether or not to use mini feature files (for debugging)'}
    )
    if not self._mini then
-     self._train_hdf5_file      = './sun360_45degsnaps_newviews/torchfeed/pixels_trn_torchfeed.h5';
-     self._val_hdf5_file        = './sun360_45degsnaps_newviews/torchfeed/pixels_val_torchfeed.h5';
-     --self._unseenval_hdf5_file  = './sun360_45degsnaps_newviews/torchfeed/pixels_val_torchfeed.h5';
-     self._test_hdf5_file       = './sun360_45degsnaps_newviews/torchfeed/pixels_tst_torchfeed.h5';
-     --self._unseentest_hdf5_file = './sun360_45degsnaps_newviews/torchfeed/pixels_tst_torchfeed.h5';
+     self._train_hdf5_file      = [config_ipdir 'torchfeed/pixels_trn_torchfeed.h5';
+     self._val_hdf5_file        = [config_ipdir 'torchfeed/pixels_val_torchfeed.h5';
+     self._test_hdf5_file       = [config_ipdir 'torchfeed/pixels_tst_torchfeed.h5';
    else
-     self._train_hdf5_file      = './sun360_45degsnaps_newviews/minitorchfeed/pixels_trn_torchfeed.h5';
-     self._val_hdf5_file        = './sun360_45degsnaps_newviews/minitorchfeed/pixels_val_torchfeed.h5';
-     --self._unseenval_hdf5_file  = './sun360_45degsnaps_newviews/minitorchfeed/pixels_val_torchfeed.h5';
-     self._test_hdf5_file       = './sun360_45degsnaps_newviews/minitorchfeed/pixels_tst_torchfeed.h5';
-     --self._unseentest_hdf5_file = './sun360_45degsnaps_newviews/minitorchfeed/pixels_test_torchfeed.h5';
+     self._train_hdf5_file      = [config_ipdir 'minitorchfeed/pixels_trn_torchfeed.h5';
+     self._val_hdf5_file        = [config_ipdir 'minitorchfeed/pixels_val_torchfeed.h5';
+     self._test_hdf5_file       = [config_ipdir 'minitorchfeed/pixels_tst_torchfeed.h5';
    end
 
    if load_all then

@@ -1,3 +1,4 @@
+require 'config'
 require 'dp'
 require 'nn'
 require 'rnn'
@@ -133,13 +134,13 @@ cmd:option('--resumeFromSnap', '', 'path to a previously saved experiment, for t
 
 cmd:option('--pretrainModeEpochs', 0, 'number of epochs to spend on pretraining lookahed module');
 cmd:option('--action_gridshape', -1, 'limits the range of actions that may be selected');
-cmd:option('--loggerfile', './outputs/loggerfile.rec', 'where optim.Logger stores results');
+cmd:option('--loggerfile', config_opdir .. 'loggerfile.rec', 'where optim.Logger stores results');
 cmd:option('--jobno', 0, 'used when entering results into results table');
 cmd:option('--greedyLossFlag', 1, 'whether or not to compute reconstruction penalty for each time step (if false, computed only at end)');
 cmd:option('--monitorUpdateRatio', -1, 'whether or not to monitor layerwise update ratios');
 cmd:option('--trackSelActions', 1, 'whether or not to display action selection histograms per epoch');
 
-dp.SAVE_DIR='./outputs/models/';
+dp.SAVE_DIR= config_opdir .. 'models/';
 
 --[[ debug ]]--
 cmd:option('--dataset', 'SUN360', 'sun360 dataset')
@@ -1211,7 +1212,7 @@ xp = dp.Experiment{
   tester = tester,
   observer = {
     ad,
-    dp.FileLogger('./outputs/'),
+    dp.FileLogger(config_opdir),
     dp.EarlyStopper{
       save_strategy = dp.SaveModelToFile(),
       max_epochs = opt.maxTries,
