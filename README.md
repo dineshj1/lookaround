@@ -1,4 +1,6 @@
-This is code for the paper "Learning to Look Around" [https://arxiv.org/abs/1709.00507]
+This is the original Torch code for the paper "Learning to Look Around", CVPR 2018 [https://arxiv.org/abs/1709.00507]
+
+Note: This code no longer runs out of the box because of issues with Torch and system libraries, but we plan to release a Pytorch implementation soon. Meanwhile, this code serves only as a reference for reimplementation.
 
 To see how to use it, see SUN360/example.sh.
 
